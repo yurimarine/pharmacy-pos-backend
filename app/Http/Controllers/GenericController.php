@@ -2,65 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Generic;
 use App\Http\Requests\StoreGenericRequest;
 use App\Http\Requests\UpdateGenericRequest;
-use App\Models\Generic;
 
 class GenericController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $generics = Generic::latest()->paginate(10);
+
+        return response()->json($generics);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreGenericRequest $request)
     {
-        //
+        $generic = Generic::create($request->validated());
+
+        return response()->json($generic, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Generic $generic)
     {
-        //
+        return response()->json($generic);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Generic $generic)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateGenericRequest $request, Generic $generic)
     {
-        //
+        $generic->update($request->validated());
+
+        return response()->json($generic);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Generic $generic)
     {
-        //
+        $generic->delete();
+
+        return response()->json(['message' => 'Deleted successfully']);
     }
 }
