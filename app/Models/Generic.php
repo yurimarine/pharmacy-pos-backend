@@ -9,4 +9,10 @@ class Generic extends Model
 {
     /** @use HasFactory<\Database\Factories\GenericFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+    ];
+    
 }
