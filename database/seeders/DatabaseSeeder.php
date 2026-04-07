@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-        GenericSeeder::class,
-    ]);
+            GenericSeeder::class,
+            SupplierSeeder::class,
+        ]);
     }
 }
